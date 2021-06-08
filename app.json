@@ -27,10 +27,12 @@
         "API_KEY": {
         "description": "Your API_HASH from https://mixdrop.co/",
         "value": ""
+        "required": false
       }, 
         "API_EMAIL": {
         "description": "Your API_HASH from https://mixdrop.co/",
         "value": ""
+        "required": false
       },
       "AUTH_USER": {
         "description": "Add Your Telegram Chat ID e.g: 1070202696, NEXT CHAT ID , AND NEXT CHAT ID",
