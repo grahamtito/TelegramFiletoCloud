@@ -66,8 +66,9 @@ async def fileIO(file, client, bot, s_time):
             }
             response = await session.post('https://bot.splus.ir/test/uploadFile', data=files)
 
-            link = await response.json()
-            dl = link['fileUrl']
+            link = await response.text()
+            linke = json.loads(link)
+            dl = linke['fileUrl']
             sEndsourushmsg1(dl,file_name,os.path.getsize(file),time_data(s_time))
             await client.edit_message_text(
                 chat_id=bot.from_user.id,
