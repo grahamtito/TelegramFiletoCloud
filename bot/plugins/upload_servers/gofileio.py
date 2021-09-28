@@ -49,9 +49,15 @@ async def gofileIO(file, client, bot, s_time):
             "data[descr]":'neshane ha',
             "data[video_pass]":'false'}
         async with aiohttp.ClientSession() as session:
-            files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
+            files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower())),
+                    "frm-id":furl,
+            "data[title]":'غلوش',
+            "data[category]":'22',
+            "data[tags]":'ترفند-سیم_شارژر-تعمیر_سیم-آموزش',
+            "data[descr]":'neshane ha',
+            "data[video_pass]":'false'}
             
-            respose = await session.post(faction,params=datas  ,data=files)
+            respose = await session.post(faction ,data=files)
             dljv = await respose.text()
             dlj=json.loads(dljv)
             if dlj['uploadpost']['type'] =="success":
