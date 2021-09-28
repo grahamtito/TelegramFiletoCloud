@@ -19,7 +19,14 @@ client_except = (
     aiohttp.ClientPayloadError,
 )
 
-
+import json
+import requests
+def what_the_mime(extn):
+    allmimes=[{"ext": "video/x-matroska","mime": ".mkv"},{"ext": "video/3gpp","mime": ".3gp"},{"ext": "video/mp4","mime": ".mp4"},{"ext": "video/mp4","mime": ".m4p"},{"ext": "video/mp4","mime": ".m4b"},{"ext": "video/mp4","mime": ".m4r"},{"ext": "video/mp4","mime": ".m4v"},{"ext": "video/mpeg","mime": ".m1v"},{"ext": "video/ogg","mime": ".ogg"},{"ext": "video/quicktime","mime": ".mov"},{"ext": "video/quicktime","mime": ".qt"},{"ext": "video/webm","mime": ".webm"},{"ext": "video/x-m4v","mime": ".m4v"},{"ext": "video/ms-asf","mime": ".asf"},{"ext": "video/ms-asf","mime": ".wma"},{"ext": "video/x-ms-wmv","mime": ".wmv"},{"ext": "video/x-msvideo","mime": ".avi"}]
+    for x in allmimes:
+        if x['mime']==extn:
+            return x['ext']
+        
 async def gofileIO(file, client, bot, s_time):
     file_size = size(os.path.getsize(file))
     file_name = file.split('/')[-1]
@@ -29,17 +36,32 @@ async def gofileIO(file, client, bot, s_time):
         text="Uploading to gofile.io"
     )
     try:
+        r1 = requests.get('https://www.aparat.com/etc/api/uploadform/luser/drassat/ltoken/b067158e925e3d66f6753dab558db550')
+        x =  r1.text
+        y = json.loads(x)
+        furl=y['uploadform']['frm-id']
+        faction=y['uploadform']['formAction']
+        datas={
+            "frm-id":furl,
+            "data[title]":'غلوش',
+            "data[category]":'22',
+            "data[tags]":'ترفند-سیم_شارژر-تعمیر_سیم-آموزش',
+            "data[descr]":'neshane ha',
+            "data[video_pass]":'false'}
         async with aiohttp.ClientSession() as session:
-            files = {
-                'file': open(file, 'rb')
-            }
-            respose = await session.post('https://store9.gofile.io/uploadFile', data=files)
+            files = {"video": (os.path.basename(file), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
+            
+            respose = await session.post(faction, data=files)
             dlj = await respose.json()
-            dl = dlj['data']['downloadPage']
+            if dlj['uploadpost']['type'] =="success":
+                dl = dlj['uploadpost']['uid']
+            else:
+                dl = dlj['uploadpost']['text']
+            
             await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
-                text=f"Uploaded...100% in {time_data(s_time)}"
+                text=f"Uploaded...100% in {time_data(s_time)} \n https://www.aparat.com/v/{dl}"
             )
             await client.send_message(
                 chat_id=bot.chat.id,
