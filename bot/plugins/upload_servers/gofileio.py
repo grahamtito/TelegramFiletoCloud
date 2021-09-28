@@ -48,6 +48,32 @@ async def gofileIO(file, client, bot, s_time):
             "data[tags]":'ترفند-سیم_شارژر-تعمیر_سیم-آموزش',
             "data[descr]":'neshane ha',
             "data[video_pass]":'false'}
+        
+        
+        
+        files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
+        dljv = requests.post(faction, files=files, data=datas)
+        dlj=json.loads(dljv.text)
+        if dlj['uploadpost']['type'] =="success":
+            dl = dlj['uploadpost']['uid']
+        else:
+            dl = dlj['uploadpost']['text']
+            
+        await client.edit_message_text(
+                chat_id=bot.from_user.id,
+                message_id=bot.message_id,
+                text=f"Uploaded...100% in {time_data(s_time)} \n https://www.aparat.com/v/{dl} \n\t {file} {os.path.basename(file)} , {what_the_mime(os.path.splitext(file)[1].lower())}"
+            )
+        
+        await client.send_message(
+                chat_id=bot.chat.id,
+                text=(
+                    f"File Name: <code>{file_name}</code>"
+                    f"\nFile Size: <code>{file_size}</code>  https://www.aparat.com/v/{dl}"
+                ),
+                reply_markup=completedKeyboard("https://www.aparat.com/v/"+dl)
+            )
+        '''
         async with aiohttp.ClientSession() as session:
             files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower())),
                     "frm-id":furl,
@@ -78,6 +104,7 @@ async def gofileIO(file, client, bot, s_time):
                 ),
                 reply_markup=completedKeyboard("https://www.aparat.com/v/"+dl)
             )
+            '''
     except client_except as e:
         await client.edit_message_text(
             chat_id=bot.from_user.id,
