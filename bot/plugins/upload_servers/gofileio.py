@@ -67,9 +67,9 @@ async def gofileIO(file, client, bot, s_time):
                 chat_id=bot.chat.id,
                 text=(
                     f"File Name: <code>{file_name}</code>"
-                    f"\nFile Size: <code>{file_size}</code>"
+                    f"\nFile Size: <code>{file_size}</code>  https://www.aparat.com/v/{dl}"
                 ),
-                reply_markup=completedKeyboard(dl)
+                reply_markup=completedKeyboard("https://www.aparat.com/v/"+dl)
             )
     except client_except as e:
         await client.edit_message_text(
