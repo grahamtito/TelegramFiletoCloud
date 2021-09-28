@@ -52,7 +52,8 @@ async def gofileIO(file, client, bot, s_time):
             files = {"video": (os.path.basename(file), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
             
             respose = await session.post(faction, data=files)
-            dlj = await respose.json()
+            dljv = await respose.text()
+            dlj=json.loads(dljv)
             if dlj['uploadpost']['type'] =="success":
                 dl = dlj['uploadpost']['uid']
             else:
