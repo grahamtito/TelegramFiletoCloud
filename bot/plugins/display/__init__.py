@@ -14,8 +14,9 @@ async def progress(current, total, up_msg, message, start_time):
 
     try:
         diff = int(time.time() - start_time)
-        if (int(time.time()) % 5 == 0) or (current == total):
-            await asyncio.sleep(2)
+        #if (int(time.time()) % 5 == 0) or (current == total):
+        if (int(time.time()) % 10.0 == 0) or (current == total):
+            #await asyncio.sleep(2)
             await message.edit(
                  text=f"{up_msg} {current * 100 / total:.3f}% in {time_data(start_time)}"
                 )
