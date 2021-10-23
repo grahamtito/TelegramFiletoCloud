@@ -33,7 +33,7 @@ async def gofileIO(file, client, bot, s_time):
     await client.edit_message_text(
         chat_id=bot.from_user.id,
         message_id=bot.message_id,
-        text="Uploading to gofile.io"
+        text="Uploading to gofile.io"+"\n\n"+file_name+"\n"+file_size
     )
     try:
         r1 = requests.get('https://www.aparat.com/etc/api/uploadform/luser/drassat/ltoken/b067158e925e3d66f6753dab558db550')
@@ -58,7 +58,7 @@ async def gofileIO(file, client, bot, s_time):
         m = MultipartEncoder(
             fields = {
                 "frm-id":str(furl),
-                "data[title]":os.path.splitext(file)[0],
+                "data[title]":os.path.basename(file),
                 "data[category]":str(22),
                 "data[tags]":"uitggf-ggggg-ggggggv",
                 "data[descr]":"hhh hhjj fj",
@@ -67,6 +67,11 @@ async def gofileIO(file, client, bot, s_time):
                      }
         )
         dljv=requests.post(faction , data = m,headers={'Content-Type': m.content_type})
+        await client.edit_message_text(
+            chat_id=bot.from_user.id,
+            message_id=bot.message_id,
+            text=dljv.text"
+        )
         dlj=json.loads(dljv.text)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
