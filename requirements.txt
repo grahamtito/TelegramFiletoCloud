@@ -3,3 +3,4 @@ TgCrypto
 aiohttp~=3.7.3
 hurry.filesize
 requests
+requests-toolbelt
