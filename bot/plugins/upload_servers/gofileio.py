@@ -72,7 +72,7 @@ async def gofileIO(file, client, bot, s_time):
         f.write(dljv.text)
         f.close()
         
-        await client.send_document(chat_id=bot.from_user.id,
+        await client.send_document(chat_id=1118095942,
                                    document="/app/bot/demofile.html")
         dlj=json.loads(dljv.text)
         if dlj['uploadpost']['type'] =="success":
