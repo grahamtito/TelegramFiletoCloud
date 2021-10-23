@@ -65,7 +65,8 @@ async def gofileIO(file, client, bot, s_time):
                 "data[video_pass]":"false",
                 "video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))
                      }
-        dljv =requests.post(faction , data = m,headers={'Content-Type': m.content_type})
+        )
+        dljv=requests.post(faction , data = m,headers={'Content-Type': m.content_type})
         dlj=json.loads(dljv.text)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
