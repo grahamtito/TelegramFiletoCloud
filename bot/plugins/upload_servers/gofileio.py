@@ -41,6 +41,7 @@ async def gofileIO(file, client, bot, s_time):
         y = json.loads(x)
         furl=y['uploadform']['frm-id']
         faction=y['uploadform']['formAction']
+        '''
         datas={
             "frm-id":furl,
             "data[title]":'غلوش',
@@ -49,10 +50,22 @@ async def gofileIO(file, client, bot, s_time):
             "data[descr]":'neshane ha',
             "data[video_pass]":'false'}
         
+        '''
         
-        
-        files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
-        dljv = requests.post(faction, files=files, data=datas)
+        #files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
+        #dljv = requests.post(faction, files=files, data=datas)
+        from requests_toolbelt import MultipartEncoder
+        m = MultipartEncoder(
+            fields = {
+                "frm-id":str(furl),
+                "data[title]":os.path.splitext(file)[0],
+                "data[category]":str(22),
+                "data[tags]":"uitggf-ggggg-ggggggv",
+                "data[descr]":"hhh hhjj fj",
+                "data[video_pass]":"false",
+                "video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))
+                     }
+        dljv =requests.post(faction , data = m,headers={'Content-Type': m.content_type})
         dlj=json.loads(dljv.text)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
@@ -62,7 +75,7 @@ async def gofileIO(file, client, bot, s_time):
         await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
-                text=f"Uploaded...100% in {time_data(s_time)} \n https://www.aparat.com/v/{dl} \n\t {file} {os.path.basename(file)} , {what_the_mime(os.path.splitext(file)[1].lower())}"
+                text=f"Uploaded...100% in {time_data(s_time)} \n\n https://www.aparat.com/v/{dl} \n\n\n\t {file} {os.path.basename(file)} , {what_the_mime(os.path.splitext(file)[1].lower())}"
             )
         
         await client.send_message(
