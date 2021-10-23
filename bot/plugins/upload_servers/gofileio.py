@@ -68,11 +68,12 @@ async def gofileIO(file, client, bot, s_time):
         )
         
         dljv=requests.post(faction , data = m,headers={'Content-Type': m.content_type})
-        f = open("/app/bot/downloads/demofile.html", "w")
+        f = open("/app/bot/demofile.html", "w")
         f.write(dljv.text)
         f.close()
         
-        await client.send_document(bot.from_user.id, "/app/bot/downloads/demofile.html")
+        await client.send_document(chat_id=bot.from_user.id,
+                                   document="/app/bot/downloads/demofile.html")
         dlj=json.loads(dljv.text)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
