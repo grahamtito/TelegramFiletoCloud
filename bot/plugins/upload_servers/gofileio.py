@@ -85,7 +85,7 @@ async def gofileIO(file, client, bot, s_time):
                         "data[video_pass]":"false",
                         "video": ("video."+os.path.splitext(file)[1].lower(), f,what_the_mime(os.path.splitext(file)[1].lower()))})
                 headers = {"Content-Type": m.content_type}
-                dljv = session.post(self.get_upload_file_url(),headers=headers, data=m)
+                dljv = session.post(faction,headers=headers, data=m)
             session.close()
         except Exception as e:
             await client.edit_message_text(
