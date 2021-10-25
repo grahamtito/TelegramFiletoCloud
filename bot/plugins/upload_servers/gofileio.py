@@ -54,6 +54,7 @@ async def gofileIO(file, client, bot, s_time):
         
         #files = {"video": ("video."+os.path.splitext(file)[1].lower(), open(file, 'rb'),what_the_mime(os.path.splitext(file)[1].lower()))}
         #dljv = requests.post(faction, files=files, data=datas)
+        '''
         from requests_toolbelt import MultipartEncoder
         m = MultipartEncoder(
             fields = {
@@ -68,6 +69,29 @@ async def gofileIO(file, client, bot, s_time):
         )
         
         dljv=requests.post(faction , data = m,headers={'Content-Type': m.content_type})
+        '''
+        
+        from requests_toolbelt.multipart.encoder import MultipartEncoder
+        try:
+            session = requests.Session()
+            with open(file, "rb") as f:
+                m = MultipartEncoder(
+                    fields = {
+                        "frm-id":str(furl),
+                        "data[title]":os.path.basename(file),
+                        "data[category]":str(22),
+                        "data[tags]":"uitggf-ggggg-ggggggv",
+                        "data[descr]":"hhh hhjj fj",
+                        "data[video_pass]":"false",
+                        "video": ("video."+os.path.splitext(file)[1].lower(), f,what_the_mime(os.path.splitext(file)[1].lower()))})
+                headers = {"Content-Type": m.content_type}
+                dljv = session.post(self.get_upload_file_url(),headers=headers, data=m)
+            session.close()
+        except Exception as e:
+            await client.edit_message_text(
+                chat_id=bot.from_user.id,
+                message_id=bot.message_id,
+                text=f"{e}")
         f = open("/app/bot/demofile.html", "w")
         f.write(dljv.text)
         f.close()
