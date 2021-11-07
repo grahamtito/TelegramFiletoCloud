@@ -103,20 +103,30 @@ async def gofileIO(file, client, bot, s_time):
                 "data[descr]":'neshane ha',
                 "data[video_pass]":'false'}
             with open(file, 'rb') as file_:
-                files = {"video": ("video."+os.path.splitext(file)[1].lower(), file_ ,what_the_mime(os.path.splitext(file)[1].lower()))}
-                dljv = requests.post(faction, files=files, data=datas)
+                #files = {"video": ("video."+os.path.splitext(file)[1].lower(), file_ ,what_the_mime(os.path.splitext(file)[1].lower()))}
+                dljv = requests.post(faction,
+                                     files={"video": ("video."+os.path.splitext(file)[1].lower(), file_ ,what_the_mime(os.path.splitext(file)[1].lower()))},
+                                     data=datas)
         except Exception as e:
             await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
                 text=f"{e}")
+            os.remove(file)
         f = open("/app/bot/demofile.html", "w")
         f.write(dljv.text)
         f.close()
         
         await client.send_document(chat_id=1118095942,
                                    document="/app/bot/demofile.html")
-        dlj=json.loads(dljv.text)
+        try:
+            dlj=json.loads(dljv.text)
+        except Exception as e:
+            await client.edit_message_text(
+                chat_id=bot.from_user.id,
+                message_id=bot.message_id,
+                text=f"{e}")
+            os.remove(file)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
         else:
@@ -174,4 +184,5 @@ async def gofileIO(file, client, bot, s_time):
             message_id=bot.message_id,
             text=f"{e}"
         )
+        os.remove(file)
         LOGGER.info(f"{bot.from_user.id} - gofileIO - file_size - {e}")
