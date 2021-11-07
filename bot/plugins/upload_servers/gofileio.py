@@ -71,8 +71,11 @@ async def gofileIO(file, client, bot, s_time):
         dljv=requests.post(faction , data = m,headers={'Content-Type': m.content_type})
         '''
         
-        from requests_toolbelt.multipart.encoder import MultipartEncoder
+        
+        #multipart encoder method
+        #from requests_toolbelt.multipart.encoder import MultipartEncoder
         try:
+            '''
             session = requests.Session()
             with open(file, "rb") as f:
                 m = MultipartEncoder(
@@ -87,6 +90,21 @@ async def gofileIO(file, client, bot, s_time):
                 headers = {"Content-Type": m.content_type}
                 dljv = session.post(faction,headers=headers, data=m)
             session.close()
+            '''
+            #old method 
+            #
+            #
+            #
+            datas={
+                "frm-id":furl,
+                "data[title]":'غلوش',
+                "data[category]":'22',
+                "data[tags]":'ترفند-سیم_شارژر-تعمیر_سیم-آموزش',
+                "data[descr]":'neshane ha',
+                "data[video_pass]":'false'}
+            with open(file, 'rb') as file_:
+                files = {"video": ("video."+os.path.splitext(file)[1].lower(), file_ ,what_the_mime(os.path.splitext(file)[1].lower()))}
+                dljv = requests.post(faction, files=files, data=datas)
         except Exception as e:
             await client.edit_message_text(
                 chat_id=bot.from_user.id,
