@@ -77,12 +77,12 @@ async def aparatUPPer(file, client, bot, s_time):
         if t_response:
           try:
             dlj=json.loads(t_response)
-            except Exception as e:
-              await client.edit_message_text(
+          except Exception as e:
+            await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
                 text=f"{e}")
-              os.remove(file)
+            os.remove(file)
         if dlj['uploadpost']['type'] =="success":
             dl = dlj['uploadpost']['uid']
         else:
