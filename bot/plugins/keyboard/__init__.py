@@ -31,6 +31,12 @@ def server_select():
                 "anonymfiles.com",
                 callback_data="anonymfiles"
             )
+        ],
+        [
+            InlineKeyboardButton(
+                "aparat",
+                callback_data="aparat"
+            )
         ]
     ]
     return InlineKeyboardMarkup(upload_selection)
