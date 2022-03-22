@@ -91,7 +91,7 @@ async def aparatUPPer(file, client, bot, s_time):
         await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
-                text=f"Uploaded...100% in {time_data(s_time)} \n\n https://www.aparat.com/v/{dl} \n\n\n\t {file} {os.path.basename(file)} , {what_the_mime(os.path.splitext(file)[1].lower())}"
+                text=f"Uploaded...100% in {time_data(s_time)} \n\n https://www.aparat.com/v/{dl} \n\n\n\t {file} {os.path.basename(file)} "
             )
         
         await client.send_message(
