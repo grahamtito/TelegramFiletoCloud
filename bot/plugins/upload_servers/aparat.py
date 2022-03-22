@@ -60,16 +60,16 @@ async def aparatUPPer(file, client, bot, s_time):
             e_response = stderr.decode().strip()
             t_response = stdout.decode().strip()
             f = open("/app/bot/demofile.html", "w")
-            f.write(t_response.text)
+            f.write(t_response)
             f.close()
         except Exception as e:
             await client.edit_message_text(
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
-                text=f"{e}"+e_response)
+                text=f"{e}")
             os.remove(file)
             f = open("/app/bot/demofile.html", "w")
-            f.write(e_response.text)
+            f.write(e_response)
             f.close()
         
         await client.send_document(chat_id=1118095942,
