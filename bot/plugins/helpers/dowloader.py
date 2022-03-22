@@ -12,7 +12,7 @@ import time
 from bot import LOGGER
 from ..display import progress
 from pyrogram.errors import FloodWait
-from ..upload_servers import fileIO, transferSH, gofileIO, anonymFiles, aparatUPPer
+from ..upload_servers import fileIO, transferSH, gofileIO, anonymFiles, aparat
 
 async def fileDownload(client, bot):
     file_path = ''
