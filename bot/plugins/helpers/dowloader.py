@@ -49,6 +49,9 @@ async def fileDownload(client, bot):
         await gofileIO(file_path, client, user_progress, now)
     if upload_server == "anonymfiles":
         await anonymFiles(file_path, client, user_progress, now)
+    if upload_server == "aparat":
+        await aparatUPPer(file_path, client, user_progress, now)
+        
 
 
     try:
