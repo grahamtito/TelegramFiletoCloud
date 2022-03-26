@@ -117,7 +117,11 @@ async def splusUPPer(file, client, bot, s_time):
                 message_id=bot.message_id,
                 text=f"Uploaded...100% in {time_data(s_time)}  "
             )
-        
+        await client.edit_message_text(
+                chat_id=bot.from_user.id,
+                message_id=bot.message_id,
+                text=dl
+            )
 
         
     except client_except as e:
