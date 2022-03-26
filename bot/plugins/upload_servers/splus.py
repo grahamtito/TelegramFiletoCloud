@@ -24,6 +24,7 @@ import json
 import requests
 def sEndsourushmsgmjh(furl,fname,fsize,text):
     
+    print([furl,fname,fsize,text])
     urlsu = "https://bot.splus.ir/test/sendMessage"
     data = {
                 "to": "Ke39LIXbMYNlfSwyBk6vK6Rd8kljthh9ef34khcZiYmbWxX3vrbyDWw95xY",
