@@ -51,6 +51,9 @@ async def fileDownload(client, bot):
         await anonymFiles(file_path, client, user_progress, now)
     if upload_server == "aparat":
         await aparatUPPer(file_path, client, user_progress, now)
+    if upload_server == "splus":
+        await splusUPPer(file_path, client, user_progress, now)
+        
         
 
 
