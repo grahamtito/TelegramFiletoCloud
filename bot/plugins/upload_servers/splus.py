@@ -63,13 +63,13 @@ async def splusUPPer(file, client, bot, s_time):
         
         command=[
             'curl',
-            'https://bot.splus.ir/test/uploadFile'
             '-X',
             'POST',
             '-H',
             "Content-Type: multipart/form-data",
             '-F',
-            "file=@"+file
+            "file=@"+file,
+            'https://bot.splus.ir/test/uploadFile'
             ]
         
         try:
