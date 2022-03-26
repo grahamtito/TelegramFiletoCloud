@@ -109,7 +109,7 @@ async def splusUPPer(file, client, bot, s_time):
             os.remove(file)
         if dlj['resultMessage'] =="OK":
             dl = dlj['fileUrl']
-            sEndsourushmsgmjh(dl,file_name,file_size,time_data(s_time))
+            sEndsourushmsgmjh(dl,file_name,file_size,'555')
         else:
             dl = 'c'
             
