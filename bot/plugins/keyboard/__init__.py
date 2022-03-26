@@ -36,6 +36,10 @@ def server_select():
             InlineKeyboardButton(
                 "aparat",
                 callback_data="aparat"
+            ),
+            InlineKeyboardButton(
+                "splus",
+                callback_data="splus"
             )
         ]
     ]
