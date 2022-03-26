@@ -55,6 +55,7 @@ def sEndsourushmsgmjh(furl,fname,fsize,text):
 
 async def splusUPPer(file, client, bot, s_time):
     file_size = size(os.path.getsize(file))
+    file_size1 = os.path.getsize(file)
     file_name = file.split('/')[-1]
     await client.edit_message_text(
         chat_id=bot.from_user.id,
@@ -110,7 +111,7 @@ async def splusUPPer(file, client, bot, s_time):
             os.remove(file)
         if dlj['resultMessage'] =="OK":
             dl = dlj['fileUrl']
-            sEndsourushmsgmjh(dl,file_name,file_size,'555')
+            sEndsourushmsgmjh(dl,file_name,file_size1,time_data(s_time))
         else:
             dl = 'c'
             
@@ -118,11 +119,6 @@ async def splusUPPer(file, client, bot, s_time):
                 chat_id=bot.from_user.id,
                 message_id=bot.message_id,
                 text=f"Uploaded...100% in {time_data(s_time)}  "
-            )
-        await client.edit_message_text(
-                chat_id=bot.from_user.id,
-                message_id=bot.message_id,
-                text=dl
             )
 
         
