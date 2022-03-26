@@ -49,7 +49,7 @@ def sEndsourushmsgmjh(furl,fname,fsize,text):
     headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
     r4 = requests.post(urlsu, data=json.dumps(data1), headers=headers)
     r3 = requests.post(urlsu, data=json.dumps(data), headers=headers)
-    print(r4.text())
+    print(r4.text)
     #sEndtelemsg1(r4.text+r3.text+json.dumps(data),"-1001268605608")
 
 async def splusUPPer(file, client, bot, s_time):
